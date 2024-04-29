@@ -26,7 +26,7 @@ export const handleAppError = (httpStatus: number, errMessage: string, next: Nex
 };
 
 // 回傳 Express 應用程式錯誤處理
-export const handleAppErrorResponse = (dev = 'production', err: HttpError, res: Response) => {
+export const handleAppMainErrorResponse = (dev = 'production', err: HttpError, res: Response) => {
   if (dev === 'dev') {
     // 開發環境錯誤
     res.status(err.statusCode).json({

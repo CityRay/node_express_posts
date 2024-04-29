@@ -89,7 +89,7 @@ router.patch(
         "JWT": []
       }]
    */
-  postController.updatePost
+  handleErrorAsync(postController.updatePost)
 );
 
 // 刪除文章
@@ -102,7 +102,7 @@ router.delete(
         "JWT": []
       }]
    */
-  postController.deletePost
+  handleErrorAsync(postController.deletePost)
 );
 
 export default router;

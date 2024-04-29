@@ -8,7 +8,7 @@ import logger from 'morgan';
 import cors from 'cors';
 import { config } from './config';
 import mongoDbConnection from './connections/mongoose';
-import { handleAppErrorResponse } from './services/handleResponse';
+import { handleAppMainErrorResponse } from './services/handleResponse';
 
 // swagger
 import swaggerUi from 'swagger-ui-express';
@@ -72,7 +72,7 @@ app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
     err.isOperational = true;
   }
 
-  handleAppErrorResponse(process.env.NODE_ENV, err, res);
+  handleAppMainErrorResponse(process.env.NODE_ENV, err, res);
 });
 
 // 未捕捉到的 catch

@@ -12,9 +12,7 @@ const userController = {
   // 取得單一User
   async getUser(req: Request, res: Response, next: NextFunction) {
     const _id = req.params.id;
-    const userData = await User.findOne({ _id }).catch((error) => {
-      console.error('DB Error:', error);
-    });
+    const userData = await User.findOne({ _id });
 
     if (!userData) {
       handleAppError(404, '找不到使用者', next);

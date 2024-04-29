@@ -38,9 +38,7 @@ const postController = {
         comments: 0,
         isPublic: body.isPublic || false
       };
-      const newPost = await Post.create(postData).catch((error) => {
-        console.error('DB Error:', error);
-      });
+      const newPost = await Post.create(postData);
       handleResponse(res, newPost, '新增成功');
       return;
     }
@@ -60,8 +58,6 @@ const postController = {
 
       const result = await Post.findByIdAndUpdate(_id, postData, {
         new: true
-      }).catch((error) => {
-        console.error('DB Error:', error);
       });
 
       if (!result) {
@@ -78,9 +74,7 @@ const postController = {
   // 刪除文章
   async deletePost(req: Request, res: Response, next: NextFunction) {
     const _id = req.params.id;
-    const checkId = await Post.findById(_id).catch((error) => {
-      console.error('DB Error:', error);
-    });
+    const checkId = await Post.findById(_id);
 
     if (!checkId) {
       handleAppError(404, '找不到此文章', next);

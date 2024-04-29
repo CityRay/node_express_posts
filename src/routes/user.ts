@@ -1,5 +1,6 @@
 import express from 'express';
 import userController from '../controllers/userController';
+import { handleErrorAsync } from '../services/handleResponse';
 
 const router = express.Router();
 
@@ -21,7 +22,7 @@ router.get(
     }
   */
 
-  userController.getUserList
+  handleErrorAsync(userController.getUserList)
 );
 
 router.get(
@@ -42,7 +43,7 @@ router.get(
       }
     }
   */
-  userController.getUser
+  handleErrorAsync(userController.getUser)
 );
 
 export default router;
