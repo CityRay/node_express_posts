@@ -120,7 +120,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"第一支 Node.js 程式 - 666\",\r\n    \"content\": \"前言 nuxi 全名為 (Nuxt CLI, Nuxt Command Line Interface)，是由 Nuxt 提供開發的標準工具.6\"\r\n}",
+					"raw": "{\r\n    \"title\": \"第一支 Node.js 程式 - 666\",\r\n    \"content\": \"前言 nuxi 全名為 (Nuxt CLI, Nuxt Command Line Interface)，是由 Nuxt 提供開發的標準工具.6\",\r\n    \"likes\": [\"662a3d0da84f9835d997d63c\"]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -128,14 +128,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/api/post/662f727fce42b410d120992d",
+					"raw": "{{base_url}}/api/post/662f82c4ee0ccf75b5e7f473",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"api",
 						"post",
-						"662f727fce42b410d120992d"
+						"662f82c4ee0ccf75b5e7f473"
 					]
 				}
 			},
