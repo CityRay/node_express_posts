@@ -1,4 +1,4 @@
-import { type UserResult } from './../@type/user';
+import { type UserResult } from '../types/user';
 import { type NextFunction, type Request, type Response } from 'express';
 import { handleResponse, handleAppError } from '../services/handleResponse';
 import User from '../models/userModel';
