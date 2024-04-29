@@ -5,7 +5,7 @@ import { type PostModel, type PostResult } from '../types/post';
 import { type FilterQuery } from 'mongoose';
 import { isString } from '../utils/helpers';
 
-const postController = {
+export const postController = {
   // 取得全部文章
   async getPosts(req: Request, res: Response) {
     // asc 遞增(由小到大，由舊到新) : 1,  desc 遞減(由大到小、由新到舊) : -1
@@ -86,5 +86,3 @@ const postController = {
     handleResponse(res, [], '刪除成功');
   }
 };
-
-export default postController;

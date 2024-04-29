@@ -3,7 +3,7 @@ import { type NextFunction, type Request, type Response } from 'express';
 import { handleResponse, handleAppError } from '../services/handleResponse';
 import User from '../models/userModel';
 
-const userController = {
+export const userController = {
   // 取得全部
   async getUserList(req: Request, res: Response) {
     const user: UserResult[] = await User.find();
@@ -22,5 +22,3 @@ const userController = {
     handleResponse(res, userData, '取得成功');
   }
 };
-
-export default userController;

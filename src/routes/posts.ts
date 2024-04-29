@@ -1,5 +1,5 @@
 import express from 'express';
-import postController from '../controllers/postController';
+import { postController } from '../controllers';
 import { handleErrorAsync } from '../services/handleResponse';
 
 const router = express.Router();
