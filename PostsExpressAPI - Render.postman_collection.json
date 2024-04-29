@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "4ad97f56-0a2b-4a04-ab74-63d9bb7ea339",
+		"name": "PostsExpressAPI - Render",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "131402"
+	},
+	"item": [
+		{
+			"name": "Posts - 取得全部",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/post?timeSort=asc",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"post"
+					],
+					"query": [
+						{
+							"key": "timeSort",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User - 取得所有User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/user",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User - 取得User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/user/662a3d0da84f9835d997d63d",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"662a3d0da84f9835d997d63d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post - 新增文章",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": \"662a3d0da84f9835d997d63d\",\r\n    \"title\": \"第一支 Node.js 程式\",\r\n    \"content\": \"作者是使用 VS Code 來做開發，各位可以使是自己喜歡的編譯器來實作，編譯器來實作\",\r\n    \"tag\": [],\r\n    \"image\": \"https://placehold.co/600x400\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/post",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post - 刪除文章",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/post/662a3df2062977aed69c148d",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"post",
+						"662a3df2062977aed69c148d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post - 更新文章",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"第一支 Node.js 程式 - 666\",\r\n    \"content\": \"前言 nuxi 全名為 (Nuxt CLI, Nuxt Command Line Interface)，是由 Nuxt 提供開發的標準工具.6\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/post/662f727fce42b410d120992d",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"post",
+						"662f727fce42b410d120992d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OPTIONS",
+			"request": {
+				"method": "OPTIONS",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}",
+					"host": [
+						"{{base_url}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://node-express-posts.onrender.com",
+			"type": "string"
+		}
+	]
+}
