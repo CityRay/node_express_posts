@@ -8,8 +8,7 @@ import app from './app';
 import { type HttpError } from 'http-errors';
 import http from 'http';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const debug = require('debug')('express-project:server');
+// const debug = require('debug')('express-project:server');
 
 /**
  * Get port from environment and store in Express.
@@ -84,6 +83,9 @@ function onError(error: HttpError): void {
 
 function onListening(): void {
   const addr = server.address();
-  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr!.port;
-  debug('Listening on ' + bind);
+  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'http://localhost:' + addr!.port;
+  // debug('Listening on ' + bind);
+  if (process.env.NODE_ENV === 'dev') {
+    console.log(`Server is listening on ${bind}`);
+  }
 }
