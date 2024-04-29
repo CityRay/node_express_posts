@@ -1,14 +1,17 @@
 import express from 'express';
-import type { Request, Response, NextFunction } from 'express';
-import { type HttpError } from 'http-errors';
 import helmet from 'helmet';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from 'cors';
-import { config } from './config';
 import mongoDbConnection from './connections/mongoose';
 import { handleAppMainErrorResponse } from './services/handleResponse';
+import { routeNotFound } from './middleware/routeNotFound';
+import { config } from './config';
+
+// types
+import type { Request, Response, NextFunction } from 'express';
+import { type HttpError } from 'http-errors';
 
 // swagger
 import swaggerUi from 'swagger-ui-express';
@@ -52,12 +55,7 @@ app.use('/api/post', postsRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // catch 404
-app.use((req: Request, res: Response, next: NextFunction) => {
-  res.status(404).json({
-    status: 'false',
-    message: '請檢查路由資訊'
-  });
-});
+app.use(routeNotFound);
 
 // error handler
 app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
