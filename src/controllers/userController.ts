@@ -1,7 +1,7 @@
 import { type UserResult } from '../types/user';
 import { type NextFunction, type Request, type Response } from 'express';
 import { handleResponse, handleAppError } from '../services/handleResponse';
-import User from '../models/userModel';
+import { User } from '../models';
 
 export const userController = {
   // 取得全部

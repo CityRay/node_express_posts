@@ -1,6 +1,6 @@
 import { type NextFunction, type Request, type Response } from 'express';
 import { handleResponse, handleAppError } from '../services/handleResponse';
-import Post from '../models/postModel';
+import { Post } from '../models';
 import { type PostModel, type PostResult } from '../types/post';
 import { type FilterQuery } from 'mongoose';
 import { isString } from '../utils/helpers';

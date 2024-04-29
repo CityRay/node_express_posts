@@ -49,6 +49,5 @@ const postSchema = new Schema<PostModel, Model<PostModel>>(
     timestamps: true
   }
 );
-const Post = model('Post', postSchema);
 
-export default Post;
+export const Post = model('Post', postSchema);
