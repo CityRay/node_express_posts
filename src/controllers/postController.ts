@@ -15,7 +15,7 @@ const postController = {
 
     const posts: PostResult[] = await Post.find(q)
       .populate({
-        path: 'user', // user 欄位
+        path: 'user likes', // user likes 欄位
         select: 'name photo'
       })
       .sort({ createdAt: timeSort })
@@ -26,15 +26,15 @@ const postController = {
   // 新增文章
   async createPost(req: Request, res: Response, next: NextFunction) {
     const { body } = req as { body: PostResult };
-    const { title, content, image } = body;
+    const { user, title, content, image, tag } = body;
     if (isString(title) && title.trim() && isString(content) && content.trim() && isString(image)) {
       const postData: PostModel = {
-        title: body.title.trim(),
-        content: body.content.trim(),
-        user: body.user,
-        tag: body.tag || [],
-        image: body.image?.trim() || '',
-        likes: 0,
+        title: title.trim(),
+        content: content.trim(),
+        user,
+        tag: tag || [],
+        image: image?.trim() || '',
+        likes: [],
         comments: 0,
         isPublic: body.isPublic || false
       };
@@ -49,11 +49,12 @@ const postController = {
   async updatePost(req: Request, res: Response, next: NextFunction) {
     const _id = req.params.id;
     const { body } = req as { body: PostResult };
-    const { title, content } = body;
+    const { title, content, likes } = body;
     if (isString(title) && title.trim() && isString(content) && content.trim()) {
       const postData = {
         title: body.title.trim(),
-        content: body.content.trim()
+        content: body.content.trim(),
+        likes: likes || []
       };
 
       const result = await Post.findByIdAndUpdate(_id, postData, {

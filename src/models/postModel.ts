@@ -29,10 +29,12 @@ const postSchema = new Schema<PostModel, Model<PostModel>>(
       default: '',
       trim: true
     },
-    likes: {
-      type: Number,
-      default: 0
-    },
+    likes: [
+      {
+        type: Schema.ObjectId,
+        ref: 'User'
+      }
+    ],
     comments: {
       type: Number,
       default: 0

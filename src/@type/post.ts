@@ -6,7 +6,7 @@ export interface PostModel {
   content: string;
   tag: string[];
   image: string;
-  likes: number;
+  likes: string[];
   comments: number;
   isPublic: boolean;
 }
