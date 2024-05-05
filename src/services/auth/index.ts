@@ -21,7 +21,10 @@ export const generateSendJWT = (user: UserResult, statusCode: number, res: Respo
       token,
       data: {
         name: user.name,
-        email: user.email
+        email: user.email,
+        photo: user.photo,
+        phone: user.phone,
+        gender: user.gender
       }
     },
     '註冊成功'

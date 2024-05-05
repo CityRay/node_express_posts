@@ -8,6 +8,12 @@ const userSchema = new Schema<UserResult, Model<UserModel>>(
       required: [true, '姓名未填寫'],
       trim: true
     },
+    gender: {
+      type: String,
+      default: 'male',
+      enum: ['male', 'female'],
+      trim: true
+    },
     phone: {
       type: String,
       default: '',

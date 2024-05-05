@@ -59,6 +59,7 @@ router.post(
         schema: {
           $name: 'name',
           $email: 'email',
+          $gender: 'male',
           $password: 'password',
           $confirmPassword: 'password'
         }
@@ -67,4 +68,25 @@ router.post(
     userController.signup
   )
 );
+
+router.post(
+  '/signin',
+  handleErrorAsync(
+    /**
+     * #swagger.tags = ['User']
+     * #swagger.description = '登入功能'
+        #swagger.parameters['post'] = {
+        in: 'body',
+        description: '登入資料',
+        required: true,
+        schema: {
+          $email: 'email',
+          $password: 'password',
+        }
+      }
+   */
+    userController.signin
+  )
+);
+
 export default router;

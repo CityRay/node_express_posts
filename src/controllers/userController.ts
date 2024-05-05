@@ -26,7 +26,7 @@ export const userController = {
   },
   // 註冊
   async signup(req: Request, res: Response, next: NextFunction) {
-    const { name, email, password, confirmPassword } = req.body;
+    const { name, email, gender, password, confirmPassword } = req.body;
 
     if (!name || !email || !password || !confirmPassword) {
       handleAppError(400, '請填寫所有欄位', next);
@@ -53,9 +53,43 @@ export const userController = {
     const newUser = await User.create({
       name,
       email,
+      gender,
       password: cryptPwd
     });
 
     generateSendJWT(newUser, 201, res);
+  },
+  // 登入
+  async signin(req: Request, res: Response, next: NextFunction) {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      handleAppError(400, '帳號密碼不可為空', next);
+      return;
+    }
+
+    if (password.length < 8) {
+      handleAppError(400, '密碼長度不足，最少8碼', next);
+      return;
+    }
+
+    if (!validator.isEmail(email)) {
+      handleAppError(400, 'Email格式錯誤', next);
+      return;
+    }
+
+    const getUser = await User.findOne({ email }).select('+password');
+    if (!getUser) {
+      handleAppError(404, '找不到使用者', next);
+      return;
+    }
+
+    const isAuth = await bcrypt.compare(password, getUser.password);
+
+    if (!isAuth) {
+      handleAppError(400, '密碼不正確', next);
+    }
+
+    generateSendJWT(getUser, 201, res);
   }
 };

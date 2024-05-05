@@ -136,6 +136,10 @@
                   "type": "string",
                   "example": "email"
                 },
+                "gender": {
+                  "type": "string",
+                  "example": "male"
+                },
                 "password": {
                   "type": "string",
                   "example": "password"
@@ -148,8 +152,47 @@
               "required": [
                 "name",
                 "email",
+                "gender",
                 "password",
                 "confirmPassword"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/user/signin": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "登入功能",
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "description": "登入資料",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "email"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password"
+                }
+              },
+              "required": [
+                "email",
+                "password"
               ]
             }
           }
