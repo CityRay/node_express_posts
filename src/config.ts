@@ -10,6 +10,7 @@ class Config {
   public DATABASE_PASSWORD: string | undefined;
   public JWT_TOKEN: string | undefined;
   public JWT_SECRET: string | undefined;
+  public JWT_EXPIRES_DAYS: string | undefined;
 
   constructor() {
     this.PORT = process.env.PORT || '3000';
@@ -19,6 +20,7 @@ class Config {
     this.DATABASE_PASSWORD = process.env.DATABASE_PASSWORD || '';
     this.JWT_TOKEN = process.env.JWT_TOKEN || 'xxxxxx';
     this.JWT_SECRET = process.env.JWT_SECRET || '';
+    this.JWT_EXPIRES_DAYS = process.env.JWT_EXPIRES_DAYS || '7d';
   }
 
   public validateConfig(): void {

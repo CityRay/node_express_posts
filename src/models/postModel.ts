@@ -1,7 +1,7 @@
 import { type Model, Schema, model } from 'mongoose';
-import type { PostModel } from '../types/post';
+import type { PostModel, PostResult } from '../types/post';
 
-const postSchema = new Schema<PostModel, Model<PostModel>>(
+const postSchema = new Schema<PostResult, Model<PostModel>>(
   {
     user: {
       type: Schema.ObjectId,

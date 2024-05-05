@@ -8,6 +8,7 @@ export declare global {
       DATABASE_PASSWORD: string;
       JWT_TOKEN: string;
       JWT_SECRET: string;
+      JWT_EXPIRES_DAYS: string;
     }
   }
 }

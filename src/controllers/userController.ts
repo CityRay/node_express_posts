@@ -2,6 +2,9 @@ import { type UserResult } from '../types/user';
 import { type NextFunction, type Request, type Response } from 'express';
 import { handleResponse, handleAppError } from '../services/handleResponse';
 import { User } from '../models';
+import validator from 'validator';
+import bcrypt from 'bcryptjs';
+import { generateSendJWT } from '../services/auth';
 
 export const userController = {
   // 取得全部
@@ -20,5 +23,39 @@ export const userController = {
     }
 
     handleResponse(res, userData, '取得成功');
+  },
+  // 註冊
+  async signup(req: Request, res: Response, next: NextFunction) {
+    const { name, email, password, confirmPassword } = req.body;
+
+    if (!name || !email || !password || !confirmPassword) {
+      handleAppError(400, '請填寫所有欄位', next);
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      handleAppError(400, '密碼不一致', next);
+      return;
+    }
+
+    if (password.length < 8) {
+      handleAppError(400, '密碼長度不足，最少8碼', next);
+      return;
+    }
+
+    if (!validator.isEmail(email)) {
+      handleAppError(400, 'Email格式錯誤', next);
+      return;
+    }
+
+    // bcrypt 第一個參數是要加密的字串，第二個參數是加密強度
+    const cryptPwd = await bcrypt.hash(password, 12);
+    const newUser = await User.create({
+      name,
+      email,
+      password: cryptPwd
+    });
+
+    generateSendJWT(newUser, 201, res);
   }
 };

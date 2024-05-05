@@ -113,6 +113,54 @@
         }
       }
     },
+    "/api/user/signup": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "註冊功能",
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "description": "註冊資料",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "name"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "email"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "password"
+                },
+                "confirmPassword": {
+                  "type": "string",
+                  "example": "password"
+                }
+              },
+              "required": [
+                "name",
+                "email",
+                "password",
+                "confirmPassword"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/api/post/": {
       "get": {
         "tags": [

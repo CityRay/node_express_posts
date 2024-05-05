@@ -46,4 +46,25 @@ router.get(
   handleErrorAsync(userController.getUser)
 );
 
+router.post(
+  '/signup',
+  handleErrorAsync(
+    /**
+     * #swagger.tags = ['User']
+     * #swagger.description = '註冊功能'
+        #swagger.parameters['post'] = {
+        in: 'body',
+        description: '註冊資料',
+        required: true,
+        schema: {
+          $name: 'name',
+          $email: 'email',
+          $password: 'password',
+          $confirmPassword: 'password'
+        }
+      }
+   */
+    userController.signup
+  )
+);
 export default router;
