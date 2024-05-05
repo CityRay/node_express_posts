@@ -1,4 +1,4 @@
-import { type UserResult } from '../types/user';
+import type { JwtPayloadRequest, UserResult } from '../types/user';
 import { type NextFunction, type Request, type Response } from 'express';
 import { handleResponse, handleAppError } from '../services/handleResponse';
 import { User } from '../models';
@@ -91,5 +91,28 @@ export const userController = {
     }
 
     generateSendJWT(getUser, 201, res);
+  },
+  // 重設密碼
+  async resetPassword(req: Request, res: Response, next: NextFunction) {
+    const { password, confirmPassword } = req.body;
+
+    if (password !== confirmPassword) {
+      handleAppError(400, '密碼不一致', next);
+      return;
+    }
+
+    if (password.length < 8) {
+      handleAppError(400, '密碼長度不足，最少8碼', next);
+      return;
+    }
+
+    const cryptPwd = await bcrypt.hash(password, 12);
+    const updateUser = await User.findByIdAndUpdate(
+      (req as JwtPayloadRequest).user._id,
+      { password: cryptPwd },
+      { new: true }
+    );
+
+    handleResponse(res, updateUser, '修改成功');
   }
 };

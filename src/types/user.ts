@@ -1,3 +1,10 @@
+import type { Request } from 'express';
+import type { JwtPayload } from 'jsonwebtoken';
+
+export interface JwtPayloadRequest extends Request {
+  user: JwtPayload;
+}
+
 export interface UserModel {
   name: string;
   gender: string;

@@ -1,6 +1,7 @@
 import express from 'express';
 import { userController } from '../controllers';
 import { handleErrorAsync } from '../services/handleResponse';
+import { verifyToken } from '../services/auth';
 
 const router = express.Router();
 
@@ -86,6 +87,28 @@ router.post(
       }
    */
     userController.signin
+  )
+);
+
+router.patch(
+  '/updatePassword',
+  verifyToken,
+  handleErrorAsync(
+    /**
+     * #swagger.tags = ['User']
+     * #swagger.security = [{ "bearerAuth": [] }]
+     * #swagger.description = '修改密碼功能'
+        #swagger.parameters['patch'] = {
+        in: 'body',
+        description: '修改密碼',
+        required: true,
+        schema: {
+          $password: 'password',
+          $confirmPassword : 'confirmPassword '
+        }
+      }
+   */
+    userController.resetPassword
   )
 );
 

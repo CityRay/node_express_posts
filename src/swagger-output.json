@@ -12,11 +12,11 @@
     "https"
   ],
   "securityDefinitions": {
-    "JWT": {
+    "bearerAuth": {
       "type": "apiKey",
       "in": "header",
       "name": "Authorization",
-      "description": "請加上 Bearer Token 以取得授權"
+      "description": "請加上 Bearer \"Token\" 以取得授權"
     }
   },
   "consumes": [
@@ -202,6 +202,54 @@
             "description": ""
           }
         }
+      }
+    },
+    "/api/user/updatePassword": {
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "description": "修改密碼功能",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "patch",
+            "in": "body",
+            "description": "修改密碼",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "password": {
+                  "type": "string",
+                  "example": "password"
+                },
+                "confirmPassword": {
+                  "type": "string",
+                  "example": "confirmPassword "
+                }
+              },
+              "required": [
+                "password",
+                "confirmPassword"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/api/post/": {
