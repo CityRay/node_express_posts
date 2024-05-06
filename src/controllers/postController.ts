@@ -4,6 +4,7 @@ import { Post } from '../models';
 import { type PostModel, type PostResult } from '../types/post';
 import { type FilterQuery } from 'mongoose';
 import { isString } from '../utils/helpers';
+import type { JwtPayloadRequest } from '../types/user';
 
 export const postController = {
   // 取得全部文章
@@ -26,17 +27,17 @@ export const postController = {
   // 新增文章
   async createPost(req: Request, res: Response, next: NextFunction) {
     const { body } = req as { body: PostResult };
-    const { user, title, content, image, tag } = body;
+    const { title, content, image, tag, isPublic } = body;
     if (isString(title) && title.trim() && isString(content) && content.trim() && isString(image)) {
       const postData: PostModel = {
         title: title.trim(),
         content: content.trim(),
-        user,
+        user: (req as JwtPayloadRequest).user._id,
         tag: tag || [],
         image: image?.trim() || '',
         likes: [],
         comments: 0,
-        isPublic: body.isPublic || false
+        isPublic: isPublic || false
       };
       const newPost = await Post.create(postData);
       handleResponse(res, newPost, '新增成功');

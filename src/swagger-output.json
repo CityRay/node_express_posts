@@ -294,6 +294,11 @@
         "description": "取得所有 Posts 文章",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "timeSort",
             "in": "query",
             "description": "排序 asc, desc",
@@ -386,6 +391,11 @@
         "description": "新增 Post 文章",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "post",
             "in": "body",
             "description": "新增文章",
@@ -393,10 +403,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "user": {
-                  "type": "string",
-                  "example": "xxxxxxxxxxxxxx"
-                },
                 "title": {
                   "type": "string",
                   "example": "title"
@@ -424,7 +430,6 @@
                 }
               },
               "required": [
-                "user",
                 "title",
                 "content",
                 "tag"
@@ -455,6 +460,11 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
             "type": "string"
           },
           {
@@ -502,6 +512,11 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
             "type": "string"
           }
         ],

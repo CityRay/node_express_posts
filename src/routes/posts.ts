@@ -1,12 +1,14 @@
 import express from 'express';
 import { postController } from '../controllers';
 import { handleErrorAsync } from '../services/handleResponse';
+import { isAuth } from '../services/auth';
 
 const router = express.Router();
 
 // 取得全部文章
 router.get(
   '/',
+  isAuth,
   /**
    * #swagger.tags = ['Post']
    * #swagger.description = '取得所有 Posts 文章'
@@ -47,6 +49,7 @@ router.get(
 // 新增文章
 router.post(
   '/',
+  isAuth,
   /**
    * #swagger.tags = ['Post']
    * #swagger.description = '新增 Post 文章'
@@ -55,7 +58,6 @@ router.post(
         description: '新增文章',
         required: true,
         schema: {
-          $user: 'xxxxxxxxxxxxxx',
           $title: 'title',
           $content: 'content',
           $tag: ['教學'],
@@ -73,6 +75,7 @@ router.post(
 // 更新文章
 router.patch(
   '/:id',
+  isAuth,
   /**
    * #swagger.tags = ['Post']
    * #swagger.security = [{ "bearerAuth": [] }]
@@ -93,6 +96,7 @@ router.patch(
 // 刪除文章
 router.delete(
   '/:id',
+  isAuth,
   /**
    * #swagger.tags = ['Post']
    * #swagger.description = '刪除 Post 文章'
