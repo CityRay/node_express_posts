@@ -16,12 +16,12 @@ router.get(
         description: '個人資料',
         schema: {
           "data": [{
-            "_id": "661f4919e7a934d777e3cf1f",
+            "_id": "xxxxxxxxxxxxxxxx",
             "name": "XXX",
             "email": "",
             "photo": "https://thispersondoesnotexist.com/",
             "gender": "male",
-            "phone": "0988123123"
+            "phone": "09xxxxxxxx",
           }]
         }
       }
@@ -43,7 +43,7 @@ router.patch(
         schema: {
           $name: 'name',
           $gender: 'male',
-          $phone: '0988123123',
+          $phone: '09xxxxxxxx',
           $photo: 'https://thispersondoesnotexist.com/'
         }
       }

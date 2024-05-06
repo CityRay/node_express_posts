@@ -24,8 +24,8 @@ router.get(
       description: '取得所有文章',
       schema: {
         "data": [{
-          "_id": "661f4919e7a934d777e3cf1f",
-          "user": "661f4919e7a934d77",
+          "_id": "xxxxxxxxxxxxxx",
+          "user": "xxxxxxxxxxxxxx",
           "title": "title",
           "content": "content",
           "tag": [
@@ -35,8 +35,8 @@ router.get(
           "likes": 0,
           "comments": 0,
           "isPublic": true,
-          "createdAt": "2024-04-17T03:59:21.350Z",
-          "updatedAt": "2024-04-24T16:18:34.032Z"
+          "createdAt": "2024-01-17T03:59:21.350Z",
+          "updatedAt": "2024-01-26T16:18:33.032Z"
         }]
       }
     }
@@ -55,7 +55,7 @@ router.post(
         description: '新增文章',
         required: true,
         schema: {
-          $user: '662a1a9ce3a68306b1ccac02',
+          $user: 'xxxxxxxxxxxxxx',
           $title: 'title',
           $content: 'content',
           $tag: ['教學'],
