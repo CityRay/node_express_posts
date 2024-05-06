@@ -1,50 +1,34 @@
 import express from 'express';
 import { userController } from '../controllers';
 import { handleErrorAsync } from '../services/handleResponse';
-import { verifyToken } from '../services/auth';
+import { isAuth } from '../services/auth';
 
 const router = express.Router();
 
-router.get(
-  '/',
-  /**
-   * #swagger.tags = ['User']
-   * #swagger.description = '取得所有User資料'
-   */
-  /* #swagger.responses[200] = {
-      description: '取得所有User資料',
-      schema: {
-        "data": [{
-          "_id": "661f4919e7a934d777e3cf1f",
-          "name": "XXX",
-          "photo": "https://thispersondoesnotexist.com/"
-        }]
-      }
-    }
-  */
-
-  handleErrorAsync(userController.getUserList)
-);
-
-router.get(
-  '/:id',
-  /**
-   * #swagger.tags = ['User']
-   * #swagger.description = '取得User資料'
-   */
-  /**
-    #swagger.responses[200] = {
-      description: '取得User資料',
-      schema: {
-        "data": {
-          "_id": "661f4919e7a934d777e3cf1f",
-          "name": "XXX",
-          "photo": "https://thispersondoesnotexist.com/"
+router.post(
+  '/profile',
+  isAuth,
+  handleErrorAsync(
+    /**
+     * #swagger.tags = ['User']
+     * #swagger.security = [{ "bearerAuth": [] }]
+     * #swagger.description = '取得個人資料'
+        #swagger.responses[200] = {
+          description: '個人資料',
+          schema: {
+            "data": [{
+              "_id": "661f4919e7a934d777e3cf1f",
+              "name": "XXX",
+              "email": "",
+              "photo": "https://thispersondoesnotexist.com/",
+              "gender": "male",
+              "phone": "0988123123"
+            }]
+          }
         }
-      }
-    }
-  */
-  handleErrorAsync(userController.getUser)
+    */
+    userController.getProfile
+  )
 );
 
 router.post(
@@ -92,7 +76,7 @@ router.post(
 
 router.patch(
   '/updatePassword',
-  verifyToken,
+  isAuth,
   handleErrorAsync(
     /**
      * #swagger.tags = ['User']

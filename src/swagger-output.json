@@ -26,15 +26,22 @@
     "application/json"
   ],
   "paths": {
-    "/api/user/": {
-      "get": {
+    "/api/user/profile": {
+      "post": {
         "tags": [
           "User"
         ],
-        "description": "取得所有User資料",
+        "description": "取得個人資料",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "取得所有User資料",
+            "description": "個人資料",
             "schema": {
               "type": "object",
               "properties": {
@@ -51,9 +58,21 @@
                         "type": "string",
                         "example": "XXX"
                       },
+                      "email": {
+                        "type": "string",
+                        "example": ""
+                      },
                       "photo": {
                         "type": "string",
                         "example": "https://thispersondoesnotexist.com/"
+                      },
+                      "gender": {
+                        "type": "string",
+                        "example": "male"
+                      },
+                      "phone": {
+                        "type": "string",
+                        "example": "0988123123"
                       }
                     }
                   }
@@ -64,53 +83,12 @@
               }
             }
           }
-        }
-      }
-    },
-    "/api/user/{id}": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "取得User資料",
-        "parameters": [
+        },
+        "security": [
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "bearerAuth": []
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "取得User資料",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "_id": {
-                      "type": "string",
-                      "example": "661f4919e7a934d777e3cf1f"
-                    },
-                    "name": {
-                      "type": "string",
-                      "example": "XXX"
-                    },
-                    "photo": {
-                      "type": "string",
-                      "example": "https://thispersondoesnotexist.com/"
-                    }
-                  }
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/api/user/signup": {
