@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4ad97f56-0a2b-4a04-ab74-63d9bb7ea339",
+		"_postman_id": "d8c3a9cc-48bd-4595-bbc4-f8e9b9755d9e",
 		"name": "PostsExpressAPI - Render",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "131402"
@@ -12,13 +12,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/api/post?timeSort=asc",
+					"raw": "{{base_url}}/api/posts?timeSort=asc",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"api",
-						"post"
+						"posts"
 					],
 					"query": [
 						{
@@ -31,37 +31,150 @@
 			"response": []
 		},
 		{
-			"name": "User - 取得所有User",
+			"name": "User - 取得 User",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/api/user",
+					"raw": "{{base_url}}/api/users/profile",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"api",
-						"user"
+						"users",
+						"profile"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "User - 取得User",
+			"name": "User - 登入",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const result = pm.response.json();\r",
+							"const token = result.data.token;\r",
+							"const userId = result.data.data._id;\r",
+							"\r",
+							"if (pm.test(\"Has properties and set token\")) {\r",
+							"    pm.globals.set('token', token);\r",
+							"    pm.globals.set('userId', userId)\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Global token has been set\", function() {\r",
+							"    const getToken = pm.globals.get('token');\r",
+							"    const getUserId = pm.globals.get('userId');\r",
+							"\r",
+							"    pm.expect(token).to.eql(getToken);\r",
+							"    pm.expect(userId).to.eql(getUserId);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"email\": \"{{user_account}}\",\r\n\t\"password\": \"{{user_pwd}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{base_url}}/api/user/662a3d0da84f9835d997d63d",
+					"raw": "{{base_url}}/api/users/sign_in",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"api",
-						"user",
-						"662a3d0da84f9835d997d63d"
+						"users",
+						"sign_in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User - 註冊",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"RRRTEST\",\r\n  \"email\": \"raytest@gmail.com\",\r\n  \"gender\": \"male\",\r\n  \"password\": \"confirmPassword123\",\r\n  \"confirmPassword\": \"confirmPassword123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/users/sign_up",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"sign_up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User - 修改資料",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"RTEST666\",\r\n  \"gender\": \"male\",\r\n  \"phone\": \"0988123666\",\r\n  \"photo\": \"https://xxx.com/\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/users/profile",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"profile"
 					]
 				}
 			},
@@ -74,7 +187,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"user\": \"662a3d0da84f9835d997d63d\",\r\n    \"title\": \"第一支 Node.js 程式\",\r\n    \"content\": \"作者是使用 VS Code 來做開發，各位可以使是自己喜歡的編譯器來實作，編譯器來實作\",\r\n    \"tag\": [],\r\n    \"image\": \"https://placehold.co/600x400\"\r\n}",
+					"raw": "{\r\n    \"user\": \"{{userId}}\",\r\n    \"title\": \"第一支 Node.js 程式 {{userId}}\",\r\n    \"content\": \"作者是使用 VS Code 來做開發，各位可以使是自己喜歡的編譯器來實作，編譯器來實作\",\r\n    \"tag\": [],\r\n    \"image\": \"https://placehold.co/600x400\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -82,45 +195,45 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/api/post",
+					"raw": "{{base_url}}/api/posts",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"api",
-						"post"
+						"posts"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Post - 刪除文章",
+			"name": "Post - 刪除單筆",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/api/post/662a3df2062977aed69c148d",
+					"raw": "{{base_url}}/api/posts/663878316b7055953696126f",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"api",
-						"post",
-						"662a3df2062977aed69c148d"
+						"posts",
+						"663878316b7055953696126f"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Post - 更新文章",
+			"name": "Post - 單筆更新",
 			"request": {
 				"method": "PATCH",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"第一支 Node.js 程式 - 666\",\r\n    \"content\": \"前言 nuxi 全名為 (Nuxt CLI, Nuxt Command Line Interface)，是由 Nuxt 提供開發的標準工具.6\",\r\n    \"likes\": [\"662a3d0da84f9835d997d63c\"]\r\n}",
+					"raw": "{\r\n    \"title\": \"第一支 Node.js 程式 - 968\",\r\n    \"content\": \"前言 nuxi 全名為 (Nuxt CLI, Nuxt Command Line Interface)，是由 Nuxt 提供開發的標準工具.6\", \r\n    \"likes\": [\"662a1a9ce3a68306b1ccac02\"]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -128,14 +241,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/api/post/662f82c4ee0ccf75b5e7f473",
+					"raw": "{{base_url}}/api/posts/66387be73ca6759778ead51f",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"api",
-						"post",
-						"662f82c4ee0ccf75b5e7f473"
+						"posts",
+						"66387be73ca6759778ead51f"
 					]
 				}
 			},
@@ -180,6 +293,22 @@
 		{
 			"key": "base_url",
 			"value": "https://node-express-posts.onrender.com",
+			"type": "string"
+		},
+		{
+			"key": "base_url",
+			"value": "https://node-express-posts.onrender.com",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "user_account",
+			"value": "raytest@gmail.com",
+			"type": "string"
+		},
+		{
+			"key": "user_pwd",
+			"value": "",
 			"type": "string"
 		}
 	]
