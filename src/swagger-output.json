@@ -26,8 +26,8 @@
     "application/json"
   ],
   "paths": {
-    "/api/user/profile": {
-      "post": {
+    "/api/users/profile": {
+      "get": {
         "tags": [
           "User"
         ],
@@ -89,9 +89,65 @@
             "bearerAuth": []
           }
         ]
+      },
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "description": "修改個人資料",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "patch",
+            "in": "body",
+            "description": "修改個人資料",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "name"
+                },
+                "gender": {
+                  "type": "string",
+                  "example": "male"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": "0988123123"
+                },
+                "photo": {
+                  "type": "string",
+                  "example": "https://thispersondoesnotexist.com/"
+                }
+              },
+              "required": [
+                "name",
+                "gender",
+                "phone",
+                "photo"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
-    "/api/user/signup": {
+    "/api/users/sign_up": {
       "post": {
         "tags": [
           "User"
@@ -144,7 +200,7 @@
         }
       }
     },
-    "/api/user/signin": {
+    "/api/users/sign_in": {
       "post": {
         "tags": [
           "User"
@@ -182,7 +238,7 @@
         }
       }
     },
-    "/api/user/updatePassword": {
+    "/api/users/updatePassword": {
       "patch": {
         "tags": [
           "User"
@@ -230,7 +286,7 @@
         ]
       }
     },
-    "/api/post/": {
+    "/api/posts/": {
       "get": {
         "tags": [
           "Post"
@@ -388,7 +444,7 @@
         ]
       }
     },
-    "/api/post/{id}": {
+    "/api/posts/{id}": {
       "patch": {
         "tags": [
           "Post"
@@ -432,7 +488,7 @@
         },
         "security": [
           {
-            "JWT": []
+            "bearerAuth": []
           }
         ]
       },

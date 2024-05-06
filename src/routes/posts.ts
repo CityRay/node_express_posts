@@ -20,8 +20,7 @@ router.get(
         description: '搜尋內容',
         required: false
       }
-   */
-  /* #swagger.responses[200] = {
+    #swagger.responses[200] = {
       description: '取得所有文章',
       schema: {
         "data": [{
@@ -40,7 +39,8 @@ router.get(
           "updatedAt": "2024-04-24T16:18:34.032Z"
         }]
       }
-  } */
+    }
+  */
   handleErrorAsync(postController.getPosts)
 );
 
@@ -75,6 +75,7 @@ router.patch(
   '/:id',
   /**
    * #swagger.tags = ['Post']
+   * #swagger.security = [{ "bearerAuth": [] }]
    * #swagger.description = '修改 Post 文章'
       #swagger.parameters['patch'] = {
         in: 'body',
@@ -85,9 +86,6 @@ router.patch(
           $content: 'content'
         }
       }
-      #swagger.security = [{
-        "JWT": []
-      }]
    */
   handleErrorAsync(postController.updatePost)
 );

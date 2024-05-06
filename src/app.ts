@@ -50,8 +50,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Route
-app.use('/api/user', userRouter);
-app.use('/api/post', postsRouter);
+app.use('/api/users', userRouter);
+app.use('/api/posts', postsRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // catch 404

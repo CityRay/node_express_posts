@@ -1,4 +1,4 @@
-import type { JwtPayloadRequest } from '../types/user';
+import type { JwtPayloadRequest, UserResult } from '../types/user';
 import { type NextFunction, type Request, type Response } from 'express';
 import { handleResponse, handleAppError } from '../services/handleResponse';
 import { User } from '../models';
@@ -17,6 +17,22 @@ export const userController = {
 
     handleResponse(res, getUser, '取得成功');
   },
+  // 修改個人資料
+  async updateProfile(req: Request, res: Response, next: NextFunction) {
+    const { name, phone, photo, gender } = req.body as UserResult;
+    if (!name || !gender || !photo || !phone) {
+      handleAppError(400, '請確認欄位', next);
+    }
+
+    const updateUser = await User.findByIdAndUpdate(
+      (req as JwtPayloadRequest).user._id,
+      { name, gender, photo, phone },
+      { new: true }
+    );
+
+    handleResponse(res, updateUser, '個人資料修改成功');
+  },
+
   // 註冊
   async signup(req: Request, res: Response, next: NextFunction) {
     const { name, email, gender, password, confirmPassword } = req.body;
