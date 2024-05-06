@@ -9,6 +9,16 @@
 		{
 			"name": "Posts - 取得全部",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -183,11 +193,21 @@
 		{
 			"name": "Post - 新增文章",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"user\": \"{{userId}}\",\r\n    \"title\": \"第一支 Node.js 程式 {{userId}}\",\r\n    \"content\": \"作者是使用 VS Code 來做開發，各位可以使是自己喜歡的編譯器來實作，編譯器來實作\",\r\n    \"tag\": [],\r\n    \"image\": \"https://placehold.co/600x400\"\r\n}",
+					"raw": "{\r\n    \"title\": \"第一支 Node.js 程式 {{userId}}\",\r\n    \"content\": \"作者是使用 VS Code 來做開發，各位可以使是自己喜歡的編譯器來實作，編譯器來實作\",\r\n    \"tag\": [],\r\n    \"image\": \"https://placehold.co/600x400\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -210,17 +230,27 @@
 		{
 			"name": "Post - 刪除單筆",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/api/posts/663878316b7055953696126f",
+					"raw": "{{base_url}}/api/posts/663883d80f3e1b5565521207",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"api",
 						"posts",
-						"663878316b7055953696126f"
+						"663883d80f3e1b5565521207"
 					]
 				}
 			},
@@ -229,6 +259,16 @@
 		{
 			"name": "Post - 單筆更新",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PATCH",
 				"header": [],
 				"body": {
@@ -241,14 +281,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/api/posts/66387be73ca6759778ead51f",
+					"raw": "{{base_url}}/api/posts/663883d80f3e1b5565521207",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"api",
 						"posts",
-						"66387be73ca6759778ead51f"
+						"663883d80f3e1b5565521207"
 					]
 				}
 			},
