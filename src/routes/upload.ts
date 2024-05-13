@@ -13,7 +13,7 @@ router.post(
   /**
    * #swagger.tags = ['Upload']
    * #swagger.security = [{ "bearerAuth": [] }]
-   * #swagger.description = '上傳圖片(限制 1MB 以下)'
+   * #swagger.description = '上傳圖片(限制 2MB 以下)'
    * #swagger.consumes = ['multipart/form-data']
    *  #swagger.parameters['file'] = {
         in: 'formData',

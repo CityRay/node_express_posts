@@ -546,12 +546,12 @@
         ]
       }
     },
-    "/uploads/": {
+    "/upload/": {
       "post": {
         "tags": [
           "Upload"
         ],
-        "description": "上傳圖片(限制 1MB 以下)",
+        "description": "上傳圖片(限制 2MB 以下)",
         "consumes": [
           "multipart/form-data"
         ],
