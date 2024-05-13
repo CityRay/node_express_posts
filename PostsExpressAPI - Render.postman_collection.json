@@ -191,6 +191,45 @@
 			"response": []
 		},
 		{
+			"name": "Post - 上傳圖片",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "",
+							"type": "file",
+							"src": "/C:/Users/RayLin/Pictures/C4.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/uploads/image",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"uploads",
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Post - 新增文章",
 			"request": {
 				"auth": {
@@ -343,7 +382,7 @@
 		},
 		{
 			"key": "user_account",
-			"value": "raytest@gmail.com",
+			"value": "",
 			"type": "string"
 		},
 		{

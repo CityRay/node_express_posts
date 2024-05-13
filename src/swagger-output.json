@@ -545,6 +545,61 @@
           }
         ]
       }
+    },
+    "/api/uploads/image": {
+      "post": {
+        "tags": [
+          "Upload"
+        ],
+        "description": "上傳圖片(限制 1MB 以下)",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "file",
+            "in": "formData",
+            "type": "file",
+            "required": true,
+            "description": "File data"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "路徑",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string",
+                        "example": "xxxxxxxxxxxxxxxx"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
     }
   }
 }
