@@ -546,7 +546,7 @@
         ]
       }
     },
-    "/api/uploads/image": {
+    "/uploads/": {
       "post": {
         "tags": [
           "Upload"

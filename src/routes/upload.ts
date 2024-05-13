@@ -7,7 +7,7 @@ import { isAuth } from '../services/auth';
 const router = express.Router();
 
 router.post(
-  '/image',
+  '/',
   isAuth,
   uploadService,
   /**

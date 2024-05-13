@@ -2,7 +2,7 @@ import multer from 'multer';
 
 export const uploadService = multer({
   limits: {
-    fileSize: 1 * 1024 * 1024 // 1MB
+    fileSize: 2 * 1024 * 1024 // 2MB
   },
   fileFilter(req, file, cb) {
     const allowMimetype = ['image/png', 'image/jpg', 'image/jpeg'];

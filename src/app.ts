@@ -53,7 +53,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Route
 app.use('/api/users', userRouter);
 app.use('/api/posts', postsRouter);
-app.use('/api/uploads', uploadRouter);
+app.use('/uploads', uploadRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // catch 404

@@ -17,6 +17,7 @@ export const uploadController = {
 
     const file = files[0];
     const fileName = `images/${uuidv4()}.${file.originalname.split('.').pop()}`;
+
     // 建立一個 blob 物件
     const blob = bucket.file(fileName);
     // 建立一個可以寫入 blob 的物件
@@ -36,14 +37,16 @@ export const uploadController = {
         .then((url) => {
           handleResponse(res, { url }, '上傳成功');
         })
-        .catch(() => {
-          handleAppError(500, '上傳失敗', next);
+        .catch((err) => {
+          const message = err.message || '上傳失敗';
+          handleAppError(500, message, next);
         });
     });
 
     // 如果上傳過程中發生錯誤，會觸發 error 事件
-    blobStream.on('error', () => {
-      handleAppError(500, '上傳失敗', next);
+    blobStream.on('error', (err) => {
+      const message = err.message || '上傳失敗';
+      handleAppError(500, message, next);
     });
 
     // 將檔案的 buffer 寫入 blobStream
