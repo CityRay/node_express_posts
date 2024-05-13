@@ -211,19 +211,17 @@
 						{
 							"key": "",
 							"type": "file",
-							"src": "/C:/Users/RayLin/Pictures/C4.jpg"
+							"src": "/C:/Users/RayLin/Pictures/b1.png"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{base_url}}/api/uploads/image",
+					"raw": "{{base_url}}/upload",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
-						"api",
-						"uploads",
-						"image"
+						"upload"
 					]
 				}
 			},
