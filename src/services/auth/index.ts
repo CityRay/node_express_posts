@@ -18,6 +18,7 @@ export const generateSendJWT = (user: UserResult, statusCode: number, res: Respo
       data: {
         _id: user._id,
         name: user.name,
+        nickname: user.nickname,
         email: user.email,
         photo: user.photo,
         phone: user.phone,

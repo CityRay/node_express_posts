@@ -19,14 +19,25 @@ export const userController = {
   },
   // 修改個人資料
   async updateProfile(req: Request, res: Response, next: NextFunction) {
-    const { name, phone, photo, gender } = req.body as UserResult;
-    if (!name || !gender || !photo || !phone) {
+    const { name, nickname, phone, photo, gender } = req.body as UserResult;
+    if (!name || !gender || !photo || !phone || !nickname) {
       handleAppError(400, '請確認欄位', next);
+    }
+
+    if (name.length < 2 || name.length > 10 || nickname.length < 2 || nickname.length > 10) {
+      handleAppError(400, '姓名或暱稱長度不正確', next);
+      return;
+    }
+
+    // 驗證手機格式
+    if (!validator.isMobilePhone(phone, 'zh-TW')) {
+      handleAppError(400, '手機格式錯誤', next);
+      return;
     }
 
     const updateUser = await User.findByIdAndUpdate(
       (req as JwtPayloadRequest).user._id,
-      { name, gender, photo, phone },
+      { name, nickname, gender, photo, phone },
       { new: true }
     );
 
@@ -35,10 +46,15 @@ export const userController = {
 
   // 註冊
   async signup(req: Request, res: Response, next: NextFunction) {
-    const { name, email, gender, password, confirmPassword } = req.body;
+    const { name, nickname, email, gender, password, confirmPassword } = req.body;
 
-    if (!name || !email || !password || !confirmPassword) {
+    if (!name || !nickname || !email || !password || !confirmPassword) {
       handleAppError(400, '請填寫所有欄位', next);
+      return;
+    }
+
+    if (name.length < 2 || name.length > 10 || nickname.length < 2 || nickname.length > 10) {
+      handleAppError(400, '姓名或暱稱長度不正確', next);
       return;
     }
 
@@ -47,8 +63,16 @@ export const userController = {
       return;
     }
 
-    if (password.length < 8) {
-      handleAppError(400, '密碼長度不足，最少8碼', next);
+    // 密碼強度檢查: 8碼以上，至少一個大寫字母，至少一個數字
+    const validPwd = validator.isStrongPassword(password, {
+      minLength: 8,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 0
+    });
+
+    if (!validPwd) {
+      handleAppError(400, '密碼強度不足', next);
       return;
     }
 
@@ -57,10 +81,18 @@ export const userController = {
       return;
     }
 
+    const findUser = await User.findOne({ email });
+    console.log(findUser);
+    if (findUser) {
+      handleAppError(400, '此Email已被註冊', next);
+      return;
+    }
+
     // bcrypt 第一個參數是要加密的字串，第二個參數是加密強度
     const cryptPwd = await bcrypt.hash(password, 12);
     const newUser = await User.create({
       name,
+      nickname,
       email,
       gender,
       password: cryptPwd

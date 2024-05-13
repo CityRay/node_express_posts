@@ -7,6 +7,7 @@ export interface JwtPayloadRequest extends Request {
 
 export interface UserModel {
   name: string;
+  nickname: string;
   gender: string;
   phone: string;
   email: string;

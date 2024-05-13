@@ -6,7 +6,16 @@ const userSchema = new Schema<UserResult, Model<UserModel>>(
     name: {
       type: String,
       required: [true, '姓名未填寫'],
-      trim: true
+      trim: true,
+      minLength: 2,
+      maxLength: 10
+    },
+    nickname: {
+      type: String,
+      required: [true, '暱稱未填寫'],
+      trim: true,
+      minLength: 2,
+      maxLength: 10
     },
     gender: {
       type: String,
@@ -17,7 +26,6 @@ const userSchema = new Schema<UserResult, Model<UserModel>>(
     phone: {
       type: String,
       default: '',
-      unique: true,
       trim: true
     },
     email: {

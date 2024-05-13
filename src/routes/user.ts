@@ -18,6 +18,7 @@ router.get(
           "data": [{
             "_id": "xxxxxxxxxxxxxxxx",
             "name": "XXX",
+            "nickname": "nickname",
             "email": "",
             "photo": "https://thispersondoesnotexist.com/",
             "gender": "male",
@@ -42,6 +43,7 @@ router.patch(
         required: true,
         schema: {
           $name: 'name',
+          $nickname: 'nickname',
           $gender: 'male',
           $phone: '09xxxxxxxx',
           $photo: 'https://thispersondoesnotexist.com/'
@@ -62,6 +64,7 @@ router.post(
       required: true,
       schema: {
         $name: 'name',
+        $nickname: 'nickname',
         $email: 'email',
         $gender: 'male',
         $password: 'password',
