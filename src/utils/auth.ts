@@ -11,7 +11,7 @@ export const generateSignToken = (id: string) => {
 // 驗證 JWT
 export const verifyToken = async (token: string) => {
   return await new Promise((resolve, reject) => {
-    jwt.verify(token, config.JWT_SECRET!, (err, payload) => {
+    jwt.verify(token, config.JWT_SECRET, (err, payload) => {
       if (err) {
         reject(err);
         return;
