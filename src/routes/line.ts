@@ -1,18 +1,18 @@
 import express from 'express';
 import { lineController } from '../controllers';
 import { handleErrorAsync } from '../services/handleResponse';
-import { type MiddlewareConfig, middleware } from '@line/bot-sdk';
+import { type MiddlewareConfig } from '@line/bot-sdk';
 import { config } from '../config';
 
 const middlewareConfig: MiddlewareConfig = {
-  channelSecret: config.LINE_CHANNEL_SECRET || ''
+  channelSecret: config.LINE_CHANNEL_SECRET
 };
-
+console.log('middlewareConfig', middlewareConfig);
 const router = express.Router();
 
 router.post(
   '/webhook',
-  middleware(middlewareConfig),
+  // middleware(middlewareConfig),
   /**
    * #swagger.tags = ['Line']
    * #swagger.description = 'webhook 功能'

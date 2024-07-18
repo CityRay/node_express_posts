@@ -53,28 +53,30 @@ export const lineController = {
 
     console.log(events);
     // Process all the received events asynchronously.
-    const results = await Promise.all(
-      events.map(async (event: webhook.Event) => {
-        try {
-          await textEventHandler(event);
-        } catch (err: unknown) {
-          if (err instanceof HTTPFetchError) {
-            console.error(err.status);
-            console.error(err.headers.get('x-line-request-id'));
-            console.error(err.body);
-          } else if (err instanceof Error) {
-            console.error(err);
+    if (!!events && events.length > 0) {
+      const results = await Promise.all(
+        events.map(async (event: webhook.Event) => {
+          try {
+            await textEventHandler(event);
+          } catch (err: unknown) {
+            if (err instanceof HTTPFetchError) {
+              console.error(err.status);
+              console.error(err.headers.get('x-line-request-id'));
+              console.error(err.body);
+            } else if (err instanceof Error) {
+              console.error(err);
+            }
+
+            // Return an error message.
+            return res.status(500).json({
+              status: 'error'
+            });
           }
+        })
+      );
 
-          // Return an error message.
-          return res.status(500).json({
-            status: 'error'
-          });
-        }
-      })
-    );
-
-    console.log(results);
+      console.log(results);
+    }
 
     handleResponse(res, {}, 'success');
   }
