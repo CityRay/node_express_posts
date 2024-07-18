@@ -21,6 +21,8 @@ class Config {
   public FIREBASE_TOKEN_URI: string;
   public FIREBASE_AUTH_PROVIDER_X509_CERT_URL: string;
   public FIREBASE_CLIENT_X509_CERT_URL: string;
+  public LINE_CHANNEL_ACCESS_TOKEN: string;
+  public LINE_CHANNEL_SECRET: string;
 
   constructor() {
     this.PORT = process.env.PORT || '3000';
@@ -43,6 +45,9 @@ class Config {
     this.FIREBASE_AUTH_PROVIDER_X509_CERT_URL =
       process.env.FIREBASE_AUTH_PROVIDER_X509_CERT_URL || '';
     this.FIREBASE_CLIENT_X509_CERT_URL = process.env.FIREBASE_CLIENT_X509_CERT_URL || '';
+
+    this.LINE_CHANNEL_ACCESS_TOKEN = process.env.LINE_CHANNEL_ACCESS_TOKEN || '';
+    this.LINE_CHANNEL_SECRET = process.env.LINE_CHANNEL_SECRET || '';
   }
 
   public validateConfig(): void {

@@ -19,6 +19,8 @@ export declare global {
       FIREBASE_TOKEN_URI: string;
       FIREBASE_AUTH_PROVIDER_X509_CERT_URL: string;
       FIREBASE_CLIENT_X509_CERT_URL: string;
+      LINE_CHANNEL_ACCESS_TOKEN: string;
+      LINE_CHANNEL_SECRET: string;
     }
   }
 }

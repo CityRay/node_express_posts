@@ -546,6 +546,54 @@
         ]
       }
     },
+    "/line/webhook": {
+      "post": {
+        "tags": [
+          "Line"
+        ],
+        "description": "webhook 功能",
+        "parameters": [
+          {
+            "name": "post",
+            "in": "body",
+            "description": "webhook",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "name"
+                },
+                "nickname": {
+                  "type": "string",
+                  "example": "nickname"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "email"
+                },
+                "gender": {
+                  "type": "string",
+                  "example": "male"
+                }
+              },
+              "required": [
+                "name",
+                "nickname",
+                "email",
+                "gender"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/upload/": {
       "post": {
         "tags": [
